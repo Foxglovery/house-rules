@@ -9,6 +9,10 @@ public class HouseRulesDbContext : IdentityDbContext<IdentityUser>
     private readonly IConfiguration _configuration;
     
     public DbSet<UserProfile> UserProfiles { get; set; }
+    public DbSet<Chore> Chores { get; set; }
+    public DbSet<ChoreAssignment> ChoreAssignments { get; set; }
+    public DbSet<ChoreCompletion> ChoreCompletions { get; set; }
+
 
     public HouseRulesDbContext(DbContextOptions<HouseRulesDbContext> context, IConfiguration config) : base(context)
     {
@@ -46,7 +50,68 @@ public class HouseRulesDbContext : IdentityDbContext<IdentityUser>
             FirstName = "Admina",
             LastName = "Strator",
             Address = "101 Main Street",
+            UserName = "HootyPoots"
         });
+        modelBuilder.Entity<Chore>().HasData(
+            new Chore
+        {
+            Id = 1,
+            Name = "Kitchen Floors",
+            Difficulty = 2,
+            ChoreFrequencyDays = 4
+        },
+        new Chore
+        {
+            Id = 2,
+            Name = "Clean Bathroom",
+            Difficulty = 4,
+            ChoreFrequencyDays = 4
+        },
+        new Chore
+        {
+            Id = 3,
+            Name = "Mow Lawn",
+            Difficulty = 5,
+            ChoreFrequencyDays = 14
+        },
+        new Chore
+        {
+            Id = 4,
+            Name = "Clean Fridge",
+            Difficulty = 3,
+            ChoreFrequencyDays = 14
+        },
+        new Chore
+        {
+            Id = 5,
+            Name = "Tidy Bedroom",
+            Difficulty = 2,
+            ChoreFrequencyDays = 2
+        });
+
+        modelBuilder.Entity<ChoreAssignment>().HasData(
+            new ChoreAssignment
+            {
+                Id = 1,
+                UserProfileId = 1,
+                ChoreId = 4
+            },
+            new ChoreAssignment
+            {
+                Id = 2,
+                UserProfileId = 1,
+                ChoreId = 2
+            }
+            );
+        modelBuilder.Entity<ChoreCompletion>().HasData(
+            new ChoreCompletion
+            {
+                Id = 1,
+                UserProfileId = 1,
+                ChoreId = 2,
+                CompletedOn = new DateTime(2024,01,13)
+            }
+        );
 
         
         
