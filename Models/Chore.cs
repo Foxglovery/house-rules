@@ -4,6 +4,12 @@ namespace HouseRules.Models;
 
 public class Chore
 {
+    // public Chore(string name, int difficulty, int choreFrequencyDays)
+    // {
+    //     Name = name;
+    //     Difficulty = difficulty;
+    //     ChoreFrequencyDays = choreFrequencyDays;
+    // }
     public int Id { get; set; }
     [Required]
     public string Name { get; set; }
